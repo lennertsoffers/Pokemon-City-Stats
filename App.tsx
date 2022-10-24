@@ -1,12 +1,16 @@
-import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import React from "react";
+import { SafeAreaView } from "react-native";
+import Test from "./src/components/Test";
+import AuthProvider from "./src/global/provider/AuthProvider";
 
 const App = () => {
-  return (
-    <SafeAreaView>
-      <Text>Hello World</Text>
-    </SafeAreaView>
-  );
+    return (
+        <SafeAreaView>
+            <AuthProvider>
+                <Test />
+            </AuthProvider>
+        </SafeAreaView>
+    );
 };
 
 export default App;
