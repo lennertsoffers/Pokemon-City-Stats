@@ -1,16 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useEffect, useCallback, useContext } from "react";
-import AuthService from "./src/api/AuthService";
-import AuthContext from "./src/global/context/AuthContext";
-import AuthProvider from "./src/global/provider/AuthProvider";
-import Navigator from "./src/routes/MainStack";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React, { useEffect, useReducer, useCallback, useContext, createContext, useMemo } from "react";
+import Navigator from "./src/routes/Navigator";
+import HomeScreen from "./src/screens/HomeScreen";
+import LoginScreen from "./src/screens/LoginScreen";
 
 const App = () => {
-    return (
-        <AuthProvider>
-            <Navigator />
-        </AuthProvider>
-    );
+    return <Navigator />;
 };
 
 export default App;

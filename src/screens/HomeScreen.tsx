@@ -1,43 +1,19 @@
 import { Text } from "@rneui/base";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { View } from "react-native";
-import AuthService from "../api/AuthService";
-import Loading from "../components/Loading";
-import AuthContext from "../global/context/AuthContext";
+import { AuthContext } from "../routes/Navigator";
 
-const HomeScreen = ({ navigation }: any) => {
+const HomeScreen = () => {
     const authContext = useContext(AuthContext);
-    const [loadedLogin, setLoadedLogin] = useState<boolean>(false);
 
-    const logout = () => {
-        if (!authContext) return;
-
-        AuthService.logout();
-        authContext?.setLoggedIn(false);
+    const handleClick = () => {
+        authContext.logout();
     };
 
-    useEffect(() => {
-        (async () => {
-            if (!authContext) return;
-
-            const loggedIn = await AuthService.setHeader();
-            authContext.setLoggedIn(loggedIn);
-
-            if (!loggedIn) navigation.navigate("LoginScreen");
-
-            setLoadedLogin(true);
-        })();
-    }, []);
-
-    useEffect(() => {
-        if (!authContext) return;
-        if (loadedLogin && !authContext.loggedIn) navigation.navigate("LoginScreen");
-    }, [authContext]);
-
-    if (!authContext) return <Loading />;
     return (
         <View>
-            <Text onPress={logout}>HomeScreen</Text>
+            <Text onPress={handleClick}>Homescreen</Text>
+            <Text>{authContext.isLoggedIn().toString()}</Text>
         </View>
     );
 };

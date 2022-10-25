@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import AuthenticationResponse from "../models/types/AuthenticationResponse";
+import AuthenticationResponse from "../types/AuthenticationResponse";
 
 const AuthService = (() => {
     /**
@@ -51,6 +51,12 @@ const AuthService = (() => {
         return true;
     };
 
+    const isAuthenticated = async (): Promise<boolean> => {
+        if (!(await setHeader())) return false;
+        if (await _tokenIsValid()) return true;
+        return refreshToken();
+    };
+
     /**
      * Persists the tokens in the response from the server after logging in, registering or refreshing tokens
      * Also sets the newly generate access_token into the axios Authorization header
@@ -63,10 +69,39 @@ const AuthService = (() => {
         setHeader();
     };
 
+    const _tokenIsValid = async () => {
+        try {
+            await axios.get("/users/me");
+            return true;
+        } catch {
+            return false;
+        }
+    };
+
+    const _setRefreshHeader = async (): Promise<boolean> => {
+        if (!(await AsyncStorage.getItem("refresh_token"))) return false;
+
+        axios.defaults.headers.common.Authorization = `Bearer ${await AsyncStorage.getItem("refresh_token")}`;
+        return true;
+    };
+
+    const refreshToken = async () => {
+        if (!(await _setRefreshHeader())) return false;
+
+        try {
+            const { data }: { data: AuthenticationResponse } = await axios.get("/auth/refreshToken");
+            _persistAuthenticationResponse(data);
+            return true;
+        } catch {
+            return false;
+        }
+    };
+
     return {
         login,
         logout,
-        setHeader
+        setHeader,
+        isAuthenticated
     };
 })();
 
