@@ -16,7 +16,9 @@ const AuthService = (() => {
             formData.append("username", username);
             formData.append("password", password);
 
-            const { data }: { data: AuthenticationResponse } = await axios.post("/auth/login", formData);
+            const { data }: { data: AuthenticationResponse } = await axios.post("/auth/login", formData, {
+                headers: { "Content-Type": "multipart/form-data" }
+            });
 
             // If there was no error in the login request
             // - The tokens are persisted in the LocalStorage
@@ -39,6 +41,17 @@ const AuthService = (() => {
     };
 
     /**
+     * Sets the axios Authentication header to the access_token stored in the LocalStorage
+     * @returns True if the token was set
+     */
+    const setHeader = async (): Promise<boolean> => {
+        if (!(await AsyncStorage.getItem("access_token"))) return false;
+
+        axios.defaults.headers.common.Authorization = `Bearer ${await AsyncStorage.getItem("access_token")}`;
+        return true;
+    };
+
+    /**
      * Persists the tokens in the response from the server after logging in, registering or refreshing tokens
      * Also sets the newly generate access_token into the axios Authorization header
      * @param authenticationResponse The response containing the access_token and the refresh_token
@@ -47,19 +60,13 @@ const AuthService = (() => {
         AsyncStorage.setItem("access_token", authenticationResponse.access_token);
         AsyncStorage.setItem("refresh_token", authenticationResponse.refresh_token);
 
-        _setHeader();
-    };
-
-    /**
-     * Sets the axios Authentication header to the access_token stored in the LocalStorage
-     */
-    const _setHeader = () => {
-        axios.defaults.headers.common.Authorization = `Bearer ${AsyncStorage.getItem("access_token")}`;
+        setHeader();
     };
 
     return {
         login,
-        logout
+        logout,
+        setHeader
     };
 })();
 
