@@ -4,7 +4,7 @@ import { View } from "react-native";
 import ScreenContent from "../components/content/ScreenContent";
 import UserRanking from "../components/users/UserRanking";
 
-const HomeScreen = () => {
+const LeaderboardScreen = () => {
     return (
         <View>
             <ScreenContent>
@@ -14,4 +14,4 @@ const HomeScreen = () => {
     );
 };
 
-export default HomeScreen;
+export default LeaderboardScreen;

@@ -10,6 +10,7 @@ interface UserData {
     employedCitizens: number;
     satisfaction: number;
     cityName: number;
+    rank: number;
     statistics: StatisticsData;
 }
 

@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { Button, Text } from "@rneui/base";
 import { useContext } from "react";
 import { View } from "react-native";
@@ -7,6 +8,15 @@ import NavbarStyle from "../../styles/components/content/NavbarStyle";
 
 const Navbar = () => {
     const authContext = useContext(AuthContext);
+    const navigator = useNavigation();
+
+    const handleLeaderboardPress = () => {
+        navigator.navigate("Leaderboard" as never);
+    };
+
+    const handleSearchPress = () => {
+        navigator.navigate("SearchUser" as never);
+    };
 
     const handleLogoutPress = () => {
         authContext.logout();
@@ -15,10 +25,10 @@ const Navbar = () => {
     return (
         <View style={NavbarStyle.wrapper}>
             <View style={NavbarStyle.item}>
-                <Text>Nav 1</Text>
+                <Text onPress={handleLeaderboardPress}>Leaderboard</Text>
             </View>
             <View style={NavbarStyle.item}>
-                <Text>Nav 2</Text>
+                <Text onPress={handleSearchPress}>Search</Text>
             </View>
             <View style={NavbarStyle.item}>
                 <Text>Nav 3</Text>

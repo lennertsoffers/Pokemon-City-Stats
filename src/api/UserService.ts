@@ -4,7 +4,8 @@ import UserData from "../types/model/UserData";
 const UserService = (() => {
     const getRanking = async (): Promise<UserData[]> => {
         try {
-            const { data } = await axios.get("/users/ranking");
+            const { data }: { data: UserData[] } = await axios.get("/users/ranking");
+            data.forEach((userData, index) => (userData.rank = index + 1));
             return data;
         } catch (error) {
             console.log(error);
@@ -12,6 +13,16 @@ const UserService = (() => {
         }
     };
 
-    return { getRanking };
+    const getUserByFilter = async (filter: string): Promise<UserData[]> => {
+        try {
+            const { data }: { data: UserData[] } = await axios.get("/users/filter?filter=" + filter);
+            return data;
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    };
+
+    return { getRanking, getUserByFilter };
 })();
 export default UserService;

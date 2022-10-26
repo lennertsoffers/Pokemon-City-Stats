@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect, createContext, useState } from "react";
-import HomeScreen from "../screens/HomeScreen";
+import LeaderboardScreen from "../screens/LeaderboardScreen";
 import LoginScreen from "../screens/LoginScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -7,6 +7,8 @@ import AuthContextType from "../types/context/AuthContextType";
 import AuthService from "../api/AuthService";
 import LoadingScreen from "../screens/LoadingScreen";
 import UserContextProvider from "../context/UsersContextProvider";
+import SearchUserScreen from "../screens/SearchUserScreen";
+import UserDetailsScreen from "../screens/UserDetailsScreen";
 
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 const Stack = createNativeStackNavigator();
@@ -83,7 +85,9 @@ const Navigator = () => {
             <UserContextProvider>
                 <NavigationContainer>
                     <Stack.Navigator>
-                        <Stack.Screen name="Home" component={HomeScreen} />
+                        <Stack.Screen name="Leaderboard" component={LeaderboardScreen} />
+                        <Stack.Screen name="SearchUser" component={SearchUserScreen} />
+                        <Stack.Screen name="UserDetails" component={UserDetailsScreen} />
                     </Stack.Navigator>
                 </NavigationContainer>
             </UserContextProvider>
