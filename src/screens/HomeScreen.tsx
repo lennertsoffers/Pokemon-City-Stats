@@ -1,19 +1,15 @@
 import { Text } from "@rneui/base";
-import { useContext } from "react";
+import React from "react";
 import { View } from "react-native";
-import { AuthContext } from "../routes/Navigator";
+import ScreenContent from "../components/content/ScreenContent";
+import UserRanking from "../components/users/UserRanking";
 
 const HomeScreen = () => {
-    const authContext = useContext(AuthContext);
-
-    const handleClick = () => {
-        authContext.logout();
-    };
-
     return (
         <View>
-            <Text onPress={handleClick}>Homescreen</Text>
-            <Text>{authContext.isLoggedIn().toString()}</Text>
+            <ScreenContent>
+                <UserRanking />
+            </ScreenContent>
         </View>
     );
 };
