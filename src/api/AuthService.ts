@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import AuthenticationResponse from "../types/AuthenticationResponse";
+import AuthenticationResponse from "../types/api/AuthenticationResponse";
 
 const AuthService = (() => {
     /**

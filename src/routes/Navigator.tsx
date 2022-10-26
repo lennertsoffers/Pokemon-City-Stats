@@ -1,13 +1,16 @@
 import React, { useReducer, useEffect, createContext, useState } from "react";
-import HomeScreen from "../screens/HomeScreen";
+import LeaderboardScreen from "../screens/LeaderboardScreen";
 import LoginScreen from "../screens/LoginScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import AuthContextType from "../types/AuthContextType";
+import AuthContextType from "../types/context/AuthContextType";
 import AuthService from "../api/AuthService";
 import LoadingScreen from "../screens/LoadingScreen";
+import UserContextProvider from "../context/UsersContextProvider";
+import SearchUserScreen from "../screens/SearchUserScreen";
+import UserDetailsScreen from "../screens/UserDetailsScreen";
 
-export const AuthContext = createContext<AuthContextType>({ login: async () => {}, logout: () => {}, isLoggedIn: () => false });
+export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 const Stack = createNativeStackNavigator();
 
 const Navigator = () => {
@@ -57,19 +60,41 @@ const Navigator = () => {
         };
     })();
 
-    const screenStack = !state.loggedIn ? (
-        <Stack.Screen name="Login" component={LoginScreen} />
-    ) : (
-        <Stack.Screen name="Home" component={HomeScreen} />
-    );
+    const buildNavigator = () => {
+        if (loading) {
+            return (
+                <NavigationContainer>
+                    <Stack.Navigator>
+                        <Stack.Screen name="Loading" component={LoadingScreen} />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            );
+        }
 
-    return (
-        <AuthContext.Provider value={authContext}>
-            <NavigationContainer>
-                <Stack.Navigator>{loading ? <Stack.Screen name="Loading" component={LoadingScreen} /> : screenStack}</Stack.Navigator>
-            </NavigationContainer>
-        </AuthContext.Provider>
-    );
+        if (!state.loggedIn) {
+            return (
+                <NavigationContainer>
+                    <Stack.Navigator>
+                        <Stack.Screen name="Login" component={LoginScreen} />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            );
+        }
+
+        return (
+            <UserContextProvider>
+                <NavigationContainer>
+                    <Stack.Navigator>
+                        <Stack.Screen name="Leaderboard" component={LeaderboardScreen} />
+                        <Stack.Screen name="SearchUser" component={SearchUserScreen} />
+                        <Stack.Screen name="UserDetails" component={UserDetailsScreen} />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </UserContextProvider>
+        );
+    };
+
+    return <AuthContext.Provider value={authContext}>{buildNavigator()}</AuthContext.Provider>;
 };
 
 export default Navigator;
