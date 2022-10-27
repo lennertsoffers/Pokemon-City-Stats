@@ -13,7 +13,7 @@ const SearchUserByUsernameForm = () => {
     const handleSearchPress = () => {
         if (username == "") return;
 
-        UserService.getUserByFilter("username==" + username).then(users => setUsers(users));
+        UserService.getUsersByFilter("username==" + username).then(users => setUsers(users));
     };
 
     const handleUsernameChange = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
@@ -27,17 +27,15 @@ const SearchUserByUsernameForm = () => {
     return (
         <View>
             <View>
-                <View>
-                    <Text>Username</Text>
-                    <Input placeholder="Username" onChange={handleUsernameChange} value={username} onBlur={handleInputBlur} />
-                </View>
-                <View>
-                    <Pressable onPress={handleSearchPress}>
-                        <Text>Search</Text>
-                    </Pressable>
-                </View>
-                {users.length > 0 && <UserSearchResult users={users} />}
+                <Text>Username</Text>
+                <Input placeholder="Username" onChange={handleUsernameChange} value={username} onBlur={handleInputBlur} />
             </View>
+            <View>
+                <Pressable onPress={handleSearchPress}>
+                    <Text>Search</Text>
+                </Pressable>
+            </View>
+            {users.length > 0 && <UserSearchResult users={users} />}
         </View>
     );
 };

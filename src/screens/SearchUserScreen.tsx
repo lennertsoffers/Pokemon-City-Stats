@@ -26,7 +26,11 @@ const SearchUserScreen = () => {
                 <TabView.Item>
                     <SearchUserByUsernameForm />
                 </TabView.Item>
-                <TabView.Item>
+                <TabView.Item
+                    style={{
+                        width: "100%"
+                    }}
+                >
                     <SearchUserByNumericForm />
                 </TabView.Item>
             </TabView>
