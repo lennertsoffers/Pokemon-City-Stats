@@ -10,6 +10,7 @@ import UserContextProvider from "../context/UsersContextProvider";
 import SearchUserScreen from "../screens/SearchUserScreen";
 import UserDetailsScreen from "../screens/UserDetailsScreen";
 import AccountScreen from "../screens/AccountScreen";
+import CityPreviewScreen from "../screens/CityPreviewScreen";
 
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 const Stack = createNativeStackNavigator();
@@ -90,6 +91,7 @@ const Navigator = () => {
                         <Stack.Screen name="SearchUser" component={SearchUserScreen} />
                         <Stack.Screen name="UserDetails" component={UserDetailsScreen} />
                         <Stack.Screen name="Account" component={AccountScreen} />
+                        <Stack.Screen name="CityPreview" component={CityPreviewScreen} />
                     </Stack.Navigator>
                 </NavigationContainer>
             </UserContextProvider>
