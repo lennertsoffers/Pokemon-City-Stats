@@ -10,10 +10,6 @@ const UserDetailsScreen = ({ route }: NativeStackScreenProps<any>) => {
     const userData: Readonly<UserData> | undefined = route.params;
     const navigator = useNavigation();
 
-    const handleViewCityPress = () => {
-        navigator.navigate("CityPreview" as never);
-    };
-
     if (!userData) {
         return (
             <ScreenContent>
@@ -21,6 +17,10 @@ const UserDetailsScreen = ({ route }: NativeStackScreenProps<any>) => {
             </ScreenContent>
         );
     }
+
+    const handleViewCityPress = () => {
+        navigator.navigate("CityPreview" as never, userData.id as never);
+    };
 
     return (
         <ScreenContent>
