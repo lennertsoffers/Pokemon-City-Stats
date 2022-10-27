@@ -1,15 +1,14 @@
 import { Text } from "@rneui/base";
 import React from "react";
-import { View } from "react-native";
 import ScreenContent from "../components/content/ScreenContent";
-import UserRanking from "../components/users/UserRanking";
+import Account from "../components/users/Account";
 
-const LeaderboardScreen = () => {
+const AccountScreen = () => {
     return (
         <ScreenContent>
-            <UserRanking />
+            <Account />
         </ScreenContent>
     );
 };
 
-export default LeaderboardScreen;
+export default AccountScreen;

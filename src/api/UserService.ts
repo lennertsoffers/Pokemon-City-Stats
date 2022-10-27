@@ -23,6 +23,16 @@ const UserService = (() => {
         }
     };
 
-    return { getRanking, getUsersByFilter };
+    const getAccountInfo = async (): Promise<UserData> => {
+        try {
+            const { data }: { data: UserData } = await axios.get("/users/me");
+            return data;
+        } catch (error) {
+            console.log(error);
+            return {} as UserData;
+        }
+    };
+
+    return { getRanking, getUsersByFilter, getAccountInfo };
 })();
 export default UserService;

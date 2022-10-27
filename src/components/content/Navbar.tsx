@@ -18,6 +18,10 @@ const Navbar = () => {
         navigator.navigate("SearchUser" as never);
     };
 
+    const handleAccountPress = () => {
+        navigator.navigate("Account" as never);
+    };
+
     const handleLogoutPress = () => {
         authContext.logout();
     };
@@ -31,7 +35,7 @@ const Navbar = () => {
                 <Text onPress={handleSearchPress}>Search</Text>
             </View>
             <View style={NavbarStyle.item}>
-                <Text>Nav 3</Text>
+                <Text onPress={handleAccountPress}>Account</Text>
             </View>
             <View style={NavbarStyle.item}>
                 <Text onPress={handleLogoutPress}>Logout</Text>

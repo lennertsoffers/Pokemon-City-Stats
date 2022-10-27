@@ -9,6 +9,7 @@ import LoadingScreen from "../screens/LoadingScreen";
 import UserContextProvider from "../context/UsersContextProvider";
 import SearchUserScreen from "../screens/SearchUserScreen";
 import UserDetailsScreen from "../screens/UserDetailsScreen";
+import AccountScreen from "../screens/AccountScreen";
 
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 const Stack = createNativeStackNavigator();
@@ -88,6 +89,7 @@ const Navigator = () => {
                         <Stack.Screen name="Leaderboard" component={LeaderboardScreen} />
                         <Stack.Screen name="SearchUser" component={SearchUserScreen} />
                         <Stack.Screen name="UserDetails" component={UserDetailsScreen} />
+                        <Stack.Screen name="Account" component={AccountScreen} />
                     </Stack.Navigator>
                 </NavigationContainer>
             </UserContextProvider>
