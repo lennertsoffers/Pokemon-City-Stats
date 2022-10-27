@@ -1,11 +1,14 @@
-import { Route } from "@react-navigation/native";
+import { Route, useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Text } from "@rneui/base";
+import React from "react";
+import { Pressable } from "react-native";
 import ScreenContent from "../components/content/ScreenContent";
 import UserData from "../types/model/UserData";
 
 const UserDetailsScreen = ({ route }: NativeStackScreenProps<any>) => {
     const userData: Readonly<UserData> | undefined = route.params;
+    const navigator = useNavigation();
 
     if (!userData) {
         return (
@@ -15,9 +18,16 @@ const UserDetailsScreen = ({ route }: NativeStackScreenProps<any>) => {
         );
     }
 
+    const handleViewCityPress = () => {
+        navigator.navigate("CityPreview" as never, userData.id as never);
+    };
+
     return (
         <ScreenContent>
             <Text>{userData.username}</Text>
+            <Pressable onPress={handleViewCityPress}>
+                <Text>View city</Text>
+            </Pressable>
         </ScreenContent>
     );
 };
