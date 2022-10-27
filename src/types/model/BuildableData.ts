@@ -7,7 +7,7 @@ interface BuildableData {
     buildableTypeEnum: string;
     spritesheetLocation: SpritesheetLocation;
     spritesheet: NodeRequire;
-    companyType: string | undefined;
+    specialisationType: string | undefined;
 }
 
 export default BuildableData;

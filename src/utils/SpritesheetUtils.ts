@@ -48,6 +48,8 @@ const SpritesheetUtils = (() => {
                 }
             case "DECORATION":
                 return SpritesheetConfig.DECORATION_SPRITESHEET;
+            case "ROAD":
+                return SpritesheetConfig.ROAD_SPRITESHEET;
             default:
                 return SpritesheetConfig.FALLBACK_SPRITESHEET;
         }

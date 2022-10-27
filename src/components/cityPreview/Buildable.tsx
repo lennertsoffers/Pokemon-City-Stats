@@ -46,8 +46,8 @@ const Buildable = ({ buildableData }: { buildableData: BuildableData }) => {
                 overflow: "hidden",
                 position: "absolute",
                 transform: [
-                    { translateX: transform.x + buildableData.location.x * TILE_WIDTH },
-                    { translateY: transform.y + buildableData.location.y * TILE_WIDTH }
+                    { translateX: transform.x + buildableData.location.x * TILE_WIDTH - dimensions.width },
+                    { translateY: transform.y + buildableData.location.y * TILE_WIDTH - dimensions.height }
                 ],
                 left: 0,
                 top: 0,

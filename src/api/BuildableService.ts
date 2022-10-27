@@ -10,7 +10,7 @@ const BuildableService = (() => {
                 buildableData =>
                     (buildableData.spritesheet = SpritesheetUtils.getCorrespondingSpritesheet(
                         buildableData.buildableTypeEnum,
-                        buildableData.companyType
+                        buildableData.specialisationType
                     ))
             );
             return data;

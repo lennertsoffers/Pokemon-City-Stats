@@ -5,6 +5,7 @@ const SpritesheetConfig = (() => {
     const SERVICE_SPRITESHEET = require("../assets/spritesheets/service_spritesheet.png");
     const SOCIAL_SPRITESHEET = require("../assets/spritesheets/social_spritesheet.png");
     const DECORATION_SPRITESHEET = require("../assets/spritesheets/decoration_spritesheet.png");
+    const ROAD_SPRITESHEET = require("../assets/spritesheets/road_spritesheet.png");
     const FALLBACK_SPRITESHEET = require("../assets/spritesheets/unknown_texture.png");
 
     return {
@@ -14,6 +15,7 @@ const SpritesheetConfig = (() => {
         SERVICE_SPRITESHEET,
         SOCIAL_SPRITESHEET,
         DECORATION_SPRITESHEET,
+        ROAD_SPRITESHEET,
         FALLBACK_SPRITESHEET
     };
 })();
