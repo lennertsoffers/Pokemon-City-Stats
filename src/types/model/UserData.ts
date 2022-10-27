@@ -9,7 +9,7 @@ interface UserData {
     citizens: number;
     employedCitizens: number;
     satisfaction: number;
-    cityName: number;
+    cityName: string;
     rank: number;
     statistics: StatisticsData;
 }
