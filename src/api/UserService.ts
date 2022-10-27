@@ -13,7 +13,7 @@ const UserService = (() => {
         }
     };
 
-    const getUserByFilter = async (filter: string): Promise<UserData[]> => {
+    const getUsersByFilter = async (filter: string): Promise<UserData[]> => {
         try {
             const { data }: { data: UserData[] } = await axios.get("/users/filter?filter=" + filter);
             return data;
@@ -23,6 +23,6 @@ const UserService = (() => {
         }
     };
 
-    return { getRanking, getUserByFilter };
+    return { getRanking, getUsersByFilter };
 })();
 export default UserService;
