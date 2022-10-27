@@ -1,10 +1,18 @@
 import axios from "axios";
 import BuildableData from "../types/model/BuildableData";
+import SpritesheetUtils from "../utils/SpritesheetUtils";
 
 const BuildableService = (() => {
     const getBuildables = async (userId: number): Promise<BuildableData[]> => {
         try {
-            const { data } = await axios.get("/api/buildables/fromUser/" + userId);
+            const { data }: { data: BuildableData[] } = await axios.get("/api/buildables/fromUser/" + userId);
+            data.forEach(
+                buildableData =>
+                    (buildableData.spritesheet = SpritesheetUtils.getCorrespondingSpritesheet(
+                        buildableData.buildableTypeEnum,
+                        buildableData.companyType
+                    ))
+            );
             return data;
         } catch (error) {
             console.log(error);

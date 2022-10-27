@@ -62,10 +62,10 @@ const World = ({ userId }: { userId: number }) => {
                     position: "absolute",
                     left: 0,
                     top: 0,
-                    zIndex: 2
+                    zIndex: 1000
                 }}
             />
-            <Image
+            <ImageBackground
                 source={require("../../assets/images/map.png")}
                 style={{
                     height: 3200,
@@ -75,21 +75,22 @@ const World = ({ userId }: { userId: number }) => {
                     left: 0,
                     top: 0
                 }}
-            />
-            <View
-                style={{
-                    height: "100%",
-                    width: "100%",
-                    position: "absolute",
-                    left: 0,
-                    top: 0,
-                    zIndex: 1
-                }}
             >
-                {buildables.map(buildableData => (
-                    <Buildable key={buildableData.id} buildableData={buildableData} />
-                ))}
-            </View>
+                <View
+                    style={{
+                        height: "100%",
+                        width: "100%",
+                        position: "absolute",
+                        left: 0,
+                        top: 0,
+                        zIndex: 1
+                    }}
+                >
+                    {buildables.map(buildableData => (
+                        <Buildable key={buildableData.id} buildableData={buildableData} />
+                    ))}
+                </View>
+            </ImageBackground>
         </View>
     );
 };

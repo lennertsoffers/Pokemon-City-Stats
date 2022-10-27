@@ -6,6 +6,8 @@ interface BuildableData {
     location: Location;
     buildableTypeEnum: string;
     spritesheetLocation: SpritesheetLocation;
+    spritesheet: NodeRequire;
+    companyType: string | undefined;
 }
 
 export default BuildableData;
