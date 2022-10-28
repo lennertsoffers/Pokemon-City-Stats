@@ -1,25 +1,39 @@
-import React, { useContext, useEffect } from "react";
-import { ScrollView, View } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { RefreshControl } from "react-native-gesture-handler";
 import UserService from "../../api/UserService";
 import { UserContext } from "../../context/Context";
 import LoadingAnimation from "../LoadingAnimation";
-import UserCard from "./UserCard";
+import UserWithRankCard from "./UserWithRankCard";
 
 const UserRanking = () => {
+    const [refreshing, setRefreshing] = useState<boolean>(false);
     const userContext = useContext(UserContext);
+
+    const loadUsers = () => {
+        setRefreshing(true);
+        UserService.getRanking().then(users => {
+            userContext.setRankedUsers(users);
+            setRefreshing(false);
+        });
+    };
 
     const userCards =
         userContext.rankedUsers.length > 0 ? (
-            userContext.rankedUsers.map(userData => <UserCard userData={userData} key={userData.id} />)
+            userContext.rankedUsers.map(userData => <UserWithRankCard userData={userData} key={userData.id} />)
         ) : (
             <LoadingAnimation />
         );
 
+    const handleRefresh = () => {
+        loadUsers();
+    };
+
     useEffect(() => {
-        UserService.getRanking().then(users => userContext.setRankedUsers(users));
+        loadUsers();
     }, []);
 
-    return <ScrollView>{userCards}</ScrollView>;
+    return <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}>{userCards}</ScrollView>;
 };
 
 export default UserRanking;

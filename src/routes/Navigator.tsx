@@ -3,6 +3,7 @@ import LeaderboardScreen from "../screens/LeaderboardScreen";
 import LoginScreen from "../screens/LoginScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AuthContextType from "../types/context/AuthContextType";
 import AuthService from "../api/AuthService";
 import LoadingScreen from "../screens/LoadingScreen";
@@ -13,7 +14,12 @@ import AccountScreen from "../screens/AccountScreen";
 import CityPreviewScreen from "../screens/CityPreviewScreen";
 
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
-const Stack = createNativeStackNavigator();
+
+const AuthStack = createNativeStackNavigator();
+const LeaderboardStack = createNativeStackNavigator();
+const SearchUserStack = createNativeStackNavigator();
+const AccountStack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const Navigator = () => {
     const [loading, setLoading] = useState(true);
@@ -66,9 +72,9 @@ const Navigator = () => {
         if (loading) {
             return (
                 <NavigationContainer>
-                    <Stack.Navigator>
-                        <Stack.Screen name="Loading" component={LoadingScreen} />
-                    </Stack.Navigator>
+                    <AuthStack.Navigator>
+                        <AuthStack.Screen name="Loading" component={LoadingScreen} />
+                    </AuthStack.Navigator>
                 </NavigationContainer>
             );
         }
@@ -76,23 +82,143 @@ const Navigator = () => {
         if (!state.loggedIn) {
             return (
                 <NavigationContainer>
-                    <Stack.Navigator>
-                        <Stack.Screen name="Login" component={LoginScreen} />
-                    </Stack.Navigator>
+                    <AuthStack.Navigator>
+                        <AuthStack.Screen name="Login" component={LoginScreen} />
+                    </AuthStack.Navigator>
                 </NavigationContainer>
             );
         }
 
+        const LeaderboardStackScreen = () => {
+            return (
+                <LeaderboardStack.Navigator>
+                    <LeaderboardStack.Screen
+                        name="Leaderboard"
+                        component={LeaderboardScreen}
+                        options={{
+                            headerShown: false,
+                            presentation: "modal",
+                            animationTypeForReplace: "push",
+                            animation: "slide_from_right"
+                        }}
+                    />
+                    <LeaderboardStack.Screen
+                        name="UserDetails"
+                        component={UserDetailsScreen}
+                        options={{
+                            headerShown: false,
+                            presentation: "modal",
+                            animationTypeForReplace: "push",
+                            animation: "slide_from_right"
+                        }}
+                    />
+                    <LeaderboardStack.Screen
+                        name="CityPreview"
+                        component={CityPreviewScreen}
+                        options={{
+                            headerShown: false,
+                            presentation: "modal",
+                            animationTypeForReplace: "push",
+                            animation: "slide_from_right"
+                        }}
+                    />
+                </LeaderboardStack.Navigator>
+            );
+        };
+
+        const SearchStackScreen = () => {
+            return (
+                <SearchUserStack.Navigator>
+                    <SearchUserStack.Screen
+                        name="Search"
+                        component={SearchUserScreen}
+                        options={{
+                            headerShown: false,
+                            presentation: "modal",
+                            animationTypeForReplace: "push",
+                            animation: "slide_from_right"
+                        }}
+                    />
+                    <SearchUserStack.Screen
+                        name="UserDetails"
+                        component={UserDetailsScreen}
+                        options={{
+                            headerShown: false,
+                            presentation: "modal",
+                            animationTypeForReplace: "push",
+                            animation: "slide_from_right"
+                        }}
+                    />
+                    <SearchUserStack.Screen
+                        name="CityPreview"
+                        component={CityPreviewScreen}
+                        options={{
+                            headerShown: false,
+                            presentation: "modal",
+                            animationTypeForReplace: "push",
+                            animation: "slide_from_right"
+                        }}
+                    />
+                </SearchUserStack.Navigator>
+            );
+        };
+
+        const AccountStackScreen = () => {
+            return (
+                <AccountStack.Navigator>
+                    <AccountStack.Screen
+                        name="Search"
+                        component={AccountScreen}
+                        options={{
+                            headerShown: false,
+                            presentation: "modal",
+                            animationTypeForReplace: "push",
+                            animation: "slide_from_right"
+                        }}
+                    />
+                    <AccountStack.Screen
+                        name="CityPreview"
+                        component={CityPreviewScreen}
+                        options={{
+                            headerShown: false,
+                            presentation: "modal",
+                            animationTypeForReplace: "push",
+                            animation: "slide_from_right"
+                        }}
+                    />
+                </AccountStack.Navigator>
+            );
+        };
+
         return (
             <UserContextProvider>
                 <NavigationContainer>
-                    <Stack.Navigator>
-                        <Stack.Screen name="Leaderboard" component={LeaderboardScreen} />
-                        <Stack.Screen name="SearchUser" component={SearchUserScreen} />
-                        <Stack.Screen name="UserDetails" component={UserDetailsScreen} />
-                        <Stack.Screen name="Account" component={AccountScreen} />
-                        <Stack.Screen name="CityPreview" component={CityPreviewScreen} />
-                    </Stack.Navigator>
+                    <Tab.Navigator>
+                        <Tab.Screen
+                            name="LeaderboardTab"
+                            component={LeaderboardStackScreen}
+                            options={{
+                                headerShown: false,
+                                tabBarStyle: { display: "none" }
+                            }}
+                        />
+                        <Tab.Screen
+                            name="SearchUserTab"
+                            component={SearchStackScreen}
+                            options={{
+                                headerShown: false,
+                                tabBarStyle: { display: "none" }
+                            }}
+                        />
+                        <Tab.Screen
+                            name="AccountTab"
+                            component={AccountStackScreen}
+                            options={{
+                                headerShown: false,
+                                tabBarStyle: { display: "none" }
+                            }}
+                        />
+                    </Tab.Navigator>
                 </NavigationContainer>
             </UserContextProvider>
         );

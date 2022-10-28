@@ -6,11 +6,19 @@ const NavbarStyle = StyleSheet.create({
         flexDirection: "row",
         width: "100%",
         height: "100%",
-        borderTopColor: "#000",
-        borderTopWidth: 3
+        borderTopColor: "#e0e0e0",
+        borderTopWidth: 1
     },
     item: {
         flex: 0.5
+    },
+    pressable: {
+        height: "100%",
+        textAlign: "center",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
     }
 });
 

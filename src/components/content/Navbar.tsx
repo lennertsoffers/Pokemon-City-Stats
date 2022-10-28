@@ -1,44 +1,61 @@
 import { useNavigation } from "@react-navigation/native";
-import { Button, Text } from "@rneui/base";
+import { Text } from "@rneui/base";
 import { useContext } from "react";
-import { View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Pressable, View } from "react-native";
 import { AuthContext } from "../../routes/Navigator";
 import NavbarStyle from "../../styles/components/content/NavbarStyle";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import { Immersive } from "react-native-immersive";
 
 const Navbar = () => {
     const authContext = useContext(AuthContext);
     const navigator = useNavigation();
 
     const handleLeaderboardPress = () => {
-        navigator.navigate("Leaderboard" as never);
+        navigator.navigate("LeaderboardTab" as never);
+        setImmersive();
     };
 
     const handleSearchPress = () => {
-        navigator.navigate("SearchUser" as never);
+        navigator.navigate("SearchUserTab" as never);
+        setImmersive();
     };
 
     const handleAccountPress = () => {
-        navigator.navigate("Account" as never);
+        navigator.navigate("AccountTab" as never);
+        setImmersive();
     };
 
     const handleLogoutPress = () => {
         authContext.logout();
+        setImmersive();
+    };
+
+    const setImmersive = () => {
+        Immersive.setImmersive(true);
     };
 
     return (
         <View style={NavbarStyle.wrapper}>
             <View style={NavbarStyle.item}>
-                <Text onPress={handleLeaderboardPress}>Leaderboard</Text>
+                <Pressable onPress={handleLeaderboardPress} style={NavbarStyle.pressable}>
+                    <Icon name="star" size={37} color={"#000"} />
+                </Pressable>
             </View>
             <View style={NavbarStyle.item}>
-                <Text onPress={handleSearchPress}>Search</Text>
+                <Pressable onPress={handleSearchPress} style={NavbarStyle.pressable}>
+                    <Icon name="search" size={37} color={"#000"} />
+                </Pressable>
             </View>
             <View style={NavbarStyle.item}>
-                <Text onPress={handleAccountPress}>Account</Text>
+                <Pressable onPress={handleAccountPress} style={NavbarStyle.pressable}>
+                    <Icon name="user" size={37} color={"#000"} />
+                </Pressable>
             </View>
             <View style={NavbarStyle.item}>
-                <Text onPress={handleLogoutPress}>Logout</Text>
+                <Pressable onPress={handleLogoutPress} style={NavbarStyle.pressable}>
+                    <Icon name="sign-in-alt" size={37} color={"#000"} />
+                </Pressable>
             </View>
         </View>
     );

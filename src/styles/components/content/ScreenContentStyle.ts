@@ -1,12 +1,20 @@
 import { StyleSheet } from "react-native";
 
 const ScreenContentStyle = StyleSheet.create({
-    wrapper: {},
+    wrapper: {
+        backgroundColor: "#fff"
+    },
+    header: {
+        height: "8%"
+        // marginLeft: -3,
+        // marginRight: -3,
+        // elevation: 3
+    },
     children: {
-        height: "90%"
+        height: "84%"
     },
     navbar: {
-        height: "10%"
+        height: "8%"
     }
 });
 
