@@ -1,14 +1,14 @@
 import React from "react";
-import { View } from "react-native";
 import World from "../components/cityPreview/World";
+import ScreenContent from "../components/content/ScreenContent";
 
 const CityPreviewScreen = ({ route }: any) => {
     const userId: Readonly<number> = route.params;
 
     return (
-        <View>
+        <ScreenContent showNavbar={false}>
             <World userId={userId} />
-        </View>
+        </ScreenContent>
     );
 };
 

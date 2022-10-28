@@ -23,7 +23,7 @@ const UserDetailsScreen = ({ route }: NativeStackScreenProps<any>) => {
     };
 
     return (
-        <ScreenContent>
+        <ScreenContent showNavbar={false} title={userData.username} backButton={true}>
             <Text>{userData.username}</Text>
             <Pressable onPress={handleViewCityPress}>
                 <Text>View city</Text>

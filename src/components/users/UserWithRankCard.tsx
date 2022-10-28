@@ -3,7 +3,7 @@ import { Text } from "@rneui/base";
 import React, { useContext } from "react";
 import { Pressable, View } from "react-native";
 import { UserContext } from "../../context/Context";
-import UserWithRankCardStyle from "../../styles/users/UserWithRankCardStyle";
+import UserWithRankCardStyle from "../../styles/components/users/UserWithRankCardStyle";
 import UserData from "../../types/model/UserData";
 
 const UserWithRankCard = ({ userData }: { userData: UserData }) => {

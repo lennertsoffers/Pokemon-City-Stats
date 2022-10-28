@@ -11,12 +11,12 @@ const HeaderStyle = StyleSheet.create({
     item: {
         height: "100%",
         flexDirection: "column",
-        justifyContent: "center"
+        justifyContent: "center",
+        paddingLeft: 20
     },
     itemContent: {
         fontWeight: "bold",
-        fontSize: 25,
-        marginLeft: 20
+        fontSize: 25
     }
 });
 
