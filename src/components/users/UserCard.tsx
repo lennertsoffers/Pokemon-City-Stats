@@ -3,6 +3,7 @@ import { Text } from "@rneui/base";
 import React, { useContext } from "react";
 import { Pressable, View } from "react-native";
 import { UserContext } from "../../context/Context";
+import UserCardStyle from "../../styles/components/users/UserCardStyle";
 import UserData from "../../types/model/UserData";
 
 const UserCard = ({ userData }: { userData: UserData }) => {
@@ -14,11 +15,15 @@ const UserCard = ({ userData }: { userData: UserData }) => {
     };
 
     return (
-        <Pressable onPress={handleUserPress}>
-            <Text>{userData.username}</Text>
-            <Text>{userData.level}</Text>
-            <Text>{userData.statistics.score}</Text>
-            {userData.rank && <Text>{userData.rank}</Text>}
+        <Pressable style={UserCardStyle.wrapper} onPress={handleUserPress}>
+            <View style={UserCardStyle.left}>
+                <View style={UserCardStyle.usernameWrapper}>
+                    <Text style={UserCardStyle.usernameContent}>{userData.username}</Text>
+                </View>
+            </View>
+            <View style={UserCardStyle.right}>
+                <Text style={UserCardStyle.score}>{userData.statistics.score}</Text>
+            </View>
         </Pressable>
     );
 };

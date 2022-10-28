@@ -5,7 +5,7 @@ import Account from "../components/users/Account";
 
 const AccountScreen = () => {
     return (
-        <ScreenContent>
+        <ScreenContent title="Account">
             <Account />
         </ScreenContent>
     );

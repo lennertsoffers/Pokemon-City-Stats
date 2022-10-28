@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { NativeSyntheticEvent, Text, TextInputChangeEventData, View } from "react-native";
+import { NativeSyntheticEvent, Pressable, Text, TextInputChangeEventData, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import UserService from "../../api/UserService";
 import UserData from "../../types/model/UserData";
 import LoadingAnimation from "../LoadingAnimation";
 import { Immersive } from "react-native-immersive";
 import CityService from "../../api/CityService";
+import { useNavigation } from "@react-navigation/native";
 
 const Account = () => {
+    const navigator = useNavigation();
     const [accountInfo, setAccountInfo] = useState<UserData>({} as UserData);
     const [cityName, setCityName] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(true);
@@ -19,6 +21,10 @@ const Account = () => {
     const handleCityNameInputBlur = () => {
         Immersive.setImmersive(true);
         CityService.changeCityName(cityName);
+    };
+
+    const handleViewCityPress = () => {
+        navigator.navigate("CityPreview" as never, accountInfo.id as never);
     };
 
     useEffect(() => {
@@ -40,6 +46,9 @@ const Account = () => {
             <View>
                 <TextInput value={cityName} onChange={handleChangeCityName} onBlur={handleCityNameInputBlur} />
             </View>
+            <Pressable onPress={handleViewCityPress}>
+                <Text>View City</Text>
+            </Pressable>
         </View>
     );
 };
