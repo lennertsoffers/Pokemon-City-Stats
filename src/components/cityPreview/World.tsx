@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
 import { GestureResponderEvent, Image, ImageBackground, Pressable, View } from "react-native";
 import BuildableService from "../../api/BuildableService";
+import TestService from "../../api/TestService";
 import { MAP_HEIGHT, MAP_WIDTH } from "../../config/config";
 import BuildableData from "../../types/model/BuildableData";
 import Location from "../../types/model/Location";
@@ -13,6 +14,7 @@ const World = ({ userId }: { userId: number }) => {
     const [buildables, setBuildables] = useState<BuildableData[]>([]);
     const [previousLocation, setPreviousLocation] = useState<Location | undefined>(undefined);
     const [transform, setTransform] = useState<Location>({ x: 0, y: 0 });
+    const [buildableElements, setBuildableElements] = useState<JSX.Element[] | JSX.Element>([]);
 
     useEffect(() => {
         (async () => {
@@ -24,6 +26,10 @@ const World = ({ userId }: { userId: number }) => {
             setLoading(false);
         })();
     }, []);
+
+    useEffect(() => {
+        setBuildableElements(buildables.map(buildableData => <Buildable key={buildableData.id} buildableData={buildableData} />));
+    }, [buildables]);
 
     if (loading) return <LoadingAnimation />;
     return (
@@ -86,9 +92,7 @@ const World = ({ userId }: { userId: number }) => {
                         zIndex: 1
                     }}
                 >
-                    {buildables.map(buildableData => (
-                        <Buildable key={buildableData.id} buildableData={buildableData} />
-                    ))}
+                    {buildableElements}
                 </View>
             </ImageBackground>
         </View>

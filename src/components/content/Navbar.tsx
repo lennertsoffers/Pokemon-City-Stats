@@ -39,7 +39,7 @@ const Navbar = () => {
         <View style={NavbarStyle.wrapper}>
             <View style={NavbarStyle.item}>
                 <Pressable onPress={handleLeaderboardPress} style={NavbarStyle.pressable}>
-                    <Icon name="star" size={37} color={"#000"} />
+                    <Icon name="medal" size={37} color={"#000"} />
                 </Pressable>
             </View>
             <View style={NavbarStyle.item}>

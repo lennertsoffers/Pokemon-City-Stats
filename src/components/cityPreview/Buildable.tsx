@@ -1,6 +1,7 @@
 import { Image } from "@rneui/base";
 import React, { useEffect, useState } from "react";
 import { Dimensions, ImageBackground, ImageBackgroundProps, View } from "react-native";
+import TestService from "../../api/TestService";
 import { MAP_HEIGHT, MAP_WIDTH, SPRITESHEET_WIDTH, TILE_WIDTH } from "../../config/config";
 import BuildableData from "../../types/model/BuildableData";
 import Location from "../../types/model/Location";
