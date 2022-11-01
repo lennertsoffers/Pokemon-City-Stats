@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Navigator from "./src/routes/Navigator";
 import { Immersive } from "react-native-immersive";
+import { RootSiblingParent } from "react-native-root-siblings";
 
 const App = () => {
     useEffect(() => {
@@ -8,7 +9,11 @@ const App = () => {
         Immersive.setImmersive(true);
     }, []);
 
-    return <Navigator />;
+    return (
+        <RootSiblingParent>
+            <Navigator />
+        </RootSiblingParent>
+    );
 };
 
 export default App;
