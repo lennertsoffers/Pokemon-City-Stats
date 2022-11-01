@@ -19,17 +19,30 @@ const SearchUserStack = createNativeStackNavigator();
 const AccountStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+/**
+ * Main application component holding all the different screens
+ * It shows the correct stack depending on the state of the application:
+ * - Loading: If the app is still checking the auth state
+ * - Login: If the user is not logged in
+ * - Tabs: If the user is logged in
+ *   -> Each tab consists of a stack navigator
+ */
 const Navigator = () => {
     const [loading, setLoading] = useState(true);
     const authContext = useContext(AuthContext);
 
+    // Checks if the user is authenticated and sets the global state for it
     useEffect(() => {
         AuthService.isAuthenticated().then(authenticated => {
+            console.log(authenticated);
             authContext.setLoggedIn(authenticated);
             setLoading(false);
         });
     }, []);
 
+    /**
+     * Creates the correct stack for the current state of the application
+     */
     const buildNavigator = () => {
         if (loading) {
             return (

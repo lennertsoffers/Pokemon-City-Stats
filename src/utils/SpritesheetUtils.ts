@@ -3,6 +3,7 @@ import SpritesheetConfig from "../config/SpritesheetConfig";
 import SpritesheetDimension from "../types/model/SpritesheetDimensions";
 import SpritesheetLocation from "../types/model/SpritesheetLocation";
 
+/** Module containing util functions concerning spritesheets */
 const SpritesheetUtils = (() => {
     /**
      * Calculates the dimensions of the object on the spriteshee given the first and last tile index

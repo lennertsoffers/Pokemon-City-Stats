@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView } from "react-native";
 import { RefreshControl } from "react-native-gesture-handler";
 import UserService from "../../api/UserService";
 import { UserContext } from "../../context/Context";

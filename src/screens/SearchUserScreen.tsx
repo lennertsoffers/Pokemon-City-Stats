@@ -1,4 +1,4 @@
-import { Tab, TabView, Text } from "@rneui/base";
+import { TabView, Text } from "@rneui/base";
 import React, { useState } from "react";
 import { View, Pressable } from "react-native";
 import ScreenContent from "../components/content/ScreenContent";
@@ -6,6 +6,9 @@ import SearchUserByNumericForm from "../components/form/SearchUserByNumericForm"
 import SearchUserByUsernameForm from "../components/form/SearchUserByUsernameForm";
 import SearchUserScreenStyle from "../styles/screens/SearchUserScreenStyle";
 
+/**
+ * Screen holding the two forms to search users
+ */
 const SearchUserScreen = () => {
     const [tabIndex, setTabIndex] = useState(0);
 

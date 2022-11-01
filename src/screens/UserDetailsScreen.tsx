@@ -1,4 +1,4 @@
-import { Route, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Text } from "@rneui/base";
 import React from "react";
@@ -9,6 +9,9 @@ import UserData from "../types/model/UserData";
 import StringUtils from "../utils/StringUtils";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
+/**
+ * Screen showing the details of a certain user which information is passed via the route param
+ */
 const UserDetailsScreen = ({ route }: NativeStackScreenProps<any>) => {
     const userData: Readonly<UserData> | undefined = route.params;
     const navigator = useNavigation();
@@ -21,6 +24,9 @@ const UserDetailsScreen = ({ route }: NativeStackScreenProps<any>) => {
         );
     }
 
+    /**
+     * Handles pressing the view city button by navigation to the city preview screen
+     */
     const handleViewCityPress = () => {
         navigator.navigate("CityPreview" as never, userData.id as never);
     };
