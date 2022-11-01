@@ -7,6 +7,8 @@ import LoadingAnimation from "../LoadingAnimation";
 import { Immersive } from "react-native-immersive";
 import CityService from "../../api/CityService";
 import { useNavigation } from "@react-navigation/native";
+import AccountStyle from "../../styles/components/users/AccountStyle";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 const Account = () => {
     const navigator = useNavigation();
@@ -38,16 +40,31 @@ const Account = () => {
 
     if (loading) return <LoadingAnimation />;
     return (
-        <View>
-            <Text>{accountInfo.username}</Text>
-            <Text>{accountInfo.level}</Text>
-            <Text>{accountInfo.money}</Text>
-            <Text>{accountInfo.statistics.score}</Text>
-            <View>
-                <TextInput value={cityName} onChange={handleChangeCityName} onBlur={handleCityNameInputBlur} />
+        <View style={AccountStyle.wrapper}>
+            <View style={AccountStyle.nameLevel}>
+                <Text style={AccountStyle.username}>{accountInfo.username}</Text>
+                <Text style={AccountStyle.level}>LV. {accountInfo.level}</Text>
             </View>
-            <Pressable onPress={handleViewCityPress}>
-                <Text>View City</Text>
+            <View style={AccountStyle.cityName}>
+                <TextInput
+                    style={AccountStyle.cityNameInput}
+                    value={cityName}
+                    onChange={handleChangeCityName}
+                    onBlur={handleCityNameInputBlur}
+                />
+            </View>
+            <View style={AccountStyle.topic}>
+                <Icon style={AccountStyle.icon} name="chart-line" size={20} color={"#000"} />
+                <Text style={AccountStyle.label}>Score:</Text>
+                <Text style={AccountStyle.value}>{accountInfo.statistics.score}</Text>
+            </View>
+            <View style={AccountStyle.topic}>
+                <Icon style={AccountStyle.icon} name="money-check-alt" size={20} color={"#000"} />
+                <Text style={AccountStyle.label}>Total value:</Text>
+                <Text style={AccountStyle.value}>{accountInfo.statistics.totalValue}</Text>
+            </View>
+            <Pressable style={AccountStyle.viewCityButton} onPress={handleViewCityPress}>
+                <Text style={AccountStyle.viewCityButtonText}>View City</Text>
             </Pressable>
         </View>
     );

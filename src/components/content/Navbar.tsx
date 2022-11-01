@@ -49,7 +49,7 @@ const Navbar = () => {
             </View>
             <View style={NavbarStyle.item}>
                 <Pressable onPress={handleAccountPress} style={NavbarStyle.pressable}>
-                    <Icon name="user" size={37} color={"#000"} />
+                    <Icon name="user-alt" size={37} color={"#000"} />
                 </Pressable>
             </View>
             <View style={NavbarStyle.item}>
