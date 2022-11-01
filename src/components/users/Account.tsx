@@ -10,25 +10,41 @@ import { useNavigation } from "@react-navigation/native";
 import AccountStyle from "../../styles/components/users/AccountStyle";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
+/**
+ * Represents the account screen content
+ */
 const Account = () => {
     const navigator = useNavigation();
     const [accountInfo, setAccountInfo] = useState<UserData>({} as UserData);
     const [cityName, setCityName] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(true);
 
+    /**
+     * Changes the city name state to the value in the city name input box
+     */
     const handleChangeCityName = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
         setCityName(event.nativeEvent.text);
     };
 
+    /**
+     * Go back to full screen after unfocussing the input field
+     * Send a request to the server to update the city name
+     */
     const handleCityNameInputBlur = () => {
         Immersive.setImmersive(true);
         CityService.changeCityName(cityName);
     };
 
+    /**
+     * Navigates to the city preview for the current
+     */
     const handleViewCityPress = () => {
         navigator.navigate("CityPreview" as never, accountInfo.id as never);
     };
 
+    /**
+     * Loads the user data and set the city name to the city name of the user
+     */
     useEffect(() => {
         (async () => {
             const userData = await UserService.getAccountInfo();

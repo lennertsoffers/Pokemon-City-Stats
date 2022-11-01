@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NativeSyntheticEvent, Pressable, StyleSheet, TextInput, TextInputChangeEventData, TextInputComponent, View } from "react-native";
 import { Text } from "@rneui/base";
-import { Button } from "@rneui/themed";
+import { Immersive } from "react-native-immersive";
 import { AuthContext } from "../routes/Navigator";
 import LoginScreenStyle from "../styles/screens/LoginScreenStyle";
 
@@ -22,17 +22,28 @@ const LoginScreen = () => {
         authContext.login(username, password);
     };
 
+    const handleInputBlur = () => {
+        Immersive.setImmersive(true);
+    };
+
     return (
         <View style={LoginScreenStyle.wrapper}>
             <View style={LoginScreenStyle.inputWrapper}>
                 <Text style={LoginScreenStyle.label}>Username</Text>
-                <TextInput style={LoginScreenStyle.input} onChange={handleUsernameChange} value={username} placeholder="Username" />
+                <TextInput
+                    style={LoginScreenStyle.input}
+                    onBlur={handleInputBlur}
+                    onChange={handleUsernameChange}
+                    value={username}
+                    placeholder="Username"
+                />
             </View>
             <View style={LoginScreenStyle.inputWrapper}>
                 <Text style={LoginScreenStyle.label}>Password</Text>
                 <TextInput
                     style={LoginScreenStyle.input}
                     onChange={handlePasswordChange}
+                    onBlur={handleInputBlur}
                     value={password}
                     placeholder="Password"
                     secureTextEntry

@@ -4,6 +4,10 @@ import ScreenContentStyle from "../../styles/components/content/ScreenContentSty
 import Header from "./Header";
 import Navbar from "./Navbar";
 
+/**
+ * Represents the content on a screen, including the header and the navbar
+ * Used to wrap child components so that a header and navbar is shown
+ */
 const ScreenContent = ({
     children,
     showNavbar = true,
@@ -15,6 +19,7 @@ const ScreenContent = ({
     title?: string;
     backButton?: boolean;
 }) => {
+    // If the navbar is shown, the size of the container for the children is smaller
     const childrenHeight = showNavbar ? 84 : 92;
 
     return (
