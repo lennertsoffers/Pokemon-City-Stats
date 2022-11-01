@@ -1,6 +1,11 @@
 import Toast from "react-native-root-toast";
 
+/** Errorhandler with functions to handle errors */
 const ErrorHandler = (() => {
+    /**
+     * Main error handling function that handles the error by showing a toast with the correct error messages corresponding to the status code
+     * @param error The error object
+     */
     const handle = (error: any) => {
         switch (error.response.status) {
             case 400:

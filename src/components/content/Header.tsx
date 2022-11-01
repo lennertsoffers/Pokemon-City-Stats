@@ -5,9 +5,13 @@ import HeaderStyle from "../../styles/components/content/HeaderStyle";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { useNavigation } from "@react-navigation/native";
 
+/** Represents the navigation header of the app, replaces the default header */
 const Header = ({ title, backButton }: { title: string; backButton: boolean }) => {
     const navigator = useNavigation();
 
+    /**
+     * Goes one screen back in the current stack
+     */
     const handleBackButtonPress = () => {
         if (navigator.canGoBack()) navigator.goBack();
     };

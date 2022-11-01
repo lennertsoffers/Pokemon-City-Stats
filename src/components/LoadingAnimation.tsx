@@ -1,9 +1,12 @@
 import { Text } from "@rneui/base";
 import React from "react";
-import { Image, ImageBackground, View } from "react-native";
+import { View } from "react-native";
 import FastImage from "react-native-fast-image";
 import LoadingAnimationStyle from "../styles/components/LoadingAnimationStyle";
 
+/**
+ * Shows the loading animation
+ */
 const LoadingAnimation = () => {
     return (
         <View style={LoadingAnimationStyle.wrapper}>

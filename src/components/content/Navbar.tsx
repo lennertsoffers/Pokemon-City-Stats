@@ -7,6 +7,7 @@ import NavbarStyle from "../../styles/components/content/NavbarStyle";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { Immersive } from "react-native-immersive";
 
+/** Replaces the default navigation bar */
 const Navbar = () => {
     const authContext = useContext(AuthContext);
     const navigator = useNavigation();
