@@ -1,7 +1,6 @@
 interface AuthContextType {
-    login: (username: string, password: string) => Promise<void>;
-    logout: () => void;
-    isLoggedIn: () => boolean;
+    loggedIn: boolean;
+    setLoggedIn: Function;
 }
 
 export default AuthContextType;

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Navigator from "./src/routes/Navigator";
 import { Immersive } from "react-native-immersive";
 import { RootSiblingParent } from "react-native-root-siblings";
+import AuthContextProvider from "./src/context/AuthContextProvider";
 
 const App = () => {
     useEffect(() => {
@@ -11,7 +12,9 @@ const App = () => {
 
     return (
         <RootSiblingParent>
-            <Navigator />
+            <AuthContextProvider>
+                <Navigator />
+            </AuthContextProvider>
         </RootSiblingParent>
     );
 };

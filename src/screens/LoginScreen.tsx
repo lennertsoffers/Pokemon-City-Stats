@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { NativeSyntheticEvent, Pressable, StyleSheet, TextInput, TextInputChangeEventData, TextInputComponent, View } from "react-native";
 import { Text } from "@rneui/base";
 import { Immersive } from "react-native-immersive";
-import { AuthContext } from "../routes/Navigator";
 import LoginScreenStyle from "../styles/screens/LoginScreenStyle";
+import AuthService from "../api/AuthService";
+import { AuthContext } from "../context/Context";
 
 const LoginScreen = () => {
     const authContext = useContext(AuthContext);
@@ -19,7 +20,8 @@ const LoginScreen = () => {
     };
 
     const handleLoginClick = async () => {
-        authContext.login(username, password);
+        const loggedIn = await AuthService.login(username, password);
+        authContext.setLoggedIn(loggedIn);
     };
 
     const handleInputBlur = () => {

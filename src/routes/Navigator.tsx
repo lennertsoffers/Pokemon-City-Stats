@@ -1,10 +1,9 @@
-import React, { useReducer, useEffect, createContext, useState } from "react";
+import React, { useReducer, useEffect, createContext, useState, useContext } from "react";
 import LeaderboardScreen from "../screens/LeaderboardScreen";
 import LoginScreen from "../screens/LoginScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import AuthContextType from "../types/context/AuthContextType";
 import AuthService from "../api/AuthService";
 import LoadingScreen from "../screens/LoadingScreen";
 import UserContextProvider from "../context/UsersContextProvider";
@@ -12,8 +11,7 @@ import SearchUserScreen from "../screens/SearchUserScreen";
 import UserDetailsScreen from "../screens/UserDetailsScreen";
 import AccountScreen from "../screens/AccountScreen";
 import CityPreviewScreen from "../screens/CityPreviewScreen";
-
-export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+import { AuthContext } from "../context/Context";
 
 const AuthStack = createNativeStackNavigator();
 const LeaderboardStack = createNativeStackNavigator();
@@ -23,50 +21,14 @@ const Tab = createBottomTabNavigator();
 
 const Navigator = () => {
     const [loading, setLoading] = useState(true);
-    const [state, dispatch] = useReducer(
-        (prevState: any, action: any) => {
-            switch (action.type) {
-                case "LOGIN":
-                    return {
-                        ...prevState,
-                        loggedIn: true
-                    };
-                case "LOGOUT":
-                    return {
-                        ...prevState,
-                        loggedIn: false
-                    };
-            }
-        },
-        {
-            loggedIn: false
-        }
-    );
+    const authContext = useContext(AuthContext);
 
     useEffect(() => {
         AuthService.isAuthenticated().then(authenticated => {
-            if (authenticated) dispatch({ type: "LOGIN" });
+            authContext.setLoggedIn(authenticated);
             setLoading(false);
         });
     }, []);
-
-    const authContext: AuthContextType = (() => {
-        const login = async (username: string, password: string) => {
-            const loggedIn = await AuthService.login(username, password);
-            if (loggedIn) dispatch({ type: "LOGIN" });
-        };
-        const logout = () => {
-            AuthService.logout();
-            dispatch({ type: "LOGOUT" });
-        };
-        const isLoggedIn = (): boolean => state.loggedIn;
-
-        return {
-            login,
-            logout,
-            isLoggedIn
-        };
-    })();
 
     const buildNavigator = () => {
         if (loading) {
@@ -79,7 +41,7 @@ const Navigator = () => {
             );
         }
 
-        if (!state.loggedIn) {
+        if (!authContext.loggedIn) {
             return (
                 <NavigationContainer>
                     <AuthStack.Navigator>
@@ -224,7 +186,7 @@ const Navigator = () => {
         );
     };
 
-    return <AuthContext.Provider value={authContext}>{buildNavigator()}</AuthContext.Provider>;
+    return buildNavigator();
 };
 
 export default Navigator;
