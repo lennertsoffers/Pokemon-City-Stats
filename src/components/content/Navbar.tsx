@@ -2,10 +2,11 @@ import { useNavigation } from "@react-navigation/native";
 import { Text } from "@rneui/base";
 import { useContext } from "react";
 import { Pressable, View } from "react-native";
-import { AuthContext } from "../../routes/Navigator";
 import NavbarStyle from "../../styles/components/content/NavbarStyle";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { Immersive } from "react-native-immersive";
+import { AuthContext } from "../../context/Context";
+import AuthService from "../../api/AuthService";
 
 /** Replaces the default navigation bar */
 const Navbar = () => {
@@ -28,7 +29,8 @@ const Navbar = () => {
     };
 
     const handleLogoutPress = () => {
-        authContext.logout();
+        authContext.setLoggedIn(false);
+        AuthService.logout();
         setImmersive();
     };
 
