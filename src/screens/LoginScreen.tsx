@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { NativeSyntheticEvent, Pressable, StyleSheet, TextInput, TextInputChangeEventData, TextInputComponent, View } from "react-native";
 import { Text } from "@rneui/base";
 import { Immersive } from "react-native-immersive";
@@ -6,24 +6,39 @@ import LoginScreenStyle from "../styles/screens/LoginScreenStyle";
 import AuthService from "../api/AuthService";
 import { AuthContext } from "../context/Context";
 
+/**
+ * Screen showing the login form and handling login actions
+ */
 const LoginScreen = () => {
     const authContext = useContext(AuthContext);
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
+    /**
+     * Updates the username state if the value of the input field changes
+     */
     const handleUsernameChange = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
         setUsername(event.nativeEvent.text);
     };
 
+    /**
+     * Updates the password state if the value of the input field changes
+     */
     const handlePasswordChange = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
         setPassword(event.nativeEvent.text);
     };
 
+    /**
+     * Handles clicking the login button by calling the userservice to login
+     */
     const handleLoginClick = async () => {
         const loggedIn = await AuthService.login(username, password);
         authContext.setLoggedIn(loggedIn);
     };
 
+    /**
+     * Handles unfocussing the input field by going back into fullscreen mode
+     */
     const handleInputBlur = () => {
         Immersive.setImmersive(true);
     };

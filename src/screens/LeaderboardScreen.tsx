@@ -1,9 +1,10 @@
-import { Text } from "@rneui/base";
 import React from "react";
-import { View } from "react-native";
 import ScreenContent from "../components/content/ScreenContent";
 import UserRanking from "../components/users/UserRanking";
 
+/**
+ * Screen showing the ranking of the users
+ */
 const LeaderboardScreen = () => {
     return (
         <ScreenContent>
