@@ -1,11 +1,12 @@
 import { Text } from "@rneui/base";
 import React from "react";
 import { View } from "react-native";
+import LoadingAnimation from "../components/LoadingAnimation";
 
 const LoadingScreen = () => {
     return (
         <View>
-            <Text>Loading</Text>
+            <LoadingAnimation />
         </View>
     );
 };
