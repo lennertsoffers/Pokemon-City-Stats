@@ -1,6 +1,6 @@
 {
     "name": "pokemon_city_stats",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "private": true,
     "scripts": {
         "android": "react-native run-android",
@@ -17,6 +17,8 @@
         "@rneui/base": "^4.0.0-rc.6",
         "@rneui/themed": "^4.0.0-rc.6",
         "axios": "^0.27.2",
+        "expo": "^46.0.16",
+        "expo-updates": "~0.14.6",
         "react": "18.1.0",
         "react-native": "0.70.3",
         "react-native-element-dropdown": "^2.3.1",

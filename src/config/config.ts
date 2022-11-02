@@ -1,4 +1,4 @@
-export const BASE_URL = "http://10.0.2.2:8080";
+export const BASE_URL = "https://lennertsoffers.be/pokemon-city-api";
 
 export const CHUNK_DIMENSIONS = 16;
 export const SPRITESHEET_WIDTH = 256;
