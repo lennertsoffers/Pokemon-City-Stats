@@ -1,6 +1,6 @@
 {
-    "name": "pokemon_city_stats",
-    "version": "0.0.1",
+    "name": "Pokemon City Stats",
+    "version": "1.0.0",
     "private": true,
     "scripts": {
         "android": "react-native run-android",
