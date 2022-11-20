@@ -84,7 +84,7 @@ const AuthService = (() => {
      */
     const _tokenIsValid = async () => {
         try {
-            await axios.get("/users/me");
+            await axios.get("/api/users/me");
             return true;
         } catch {
             return false;
