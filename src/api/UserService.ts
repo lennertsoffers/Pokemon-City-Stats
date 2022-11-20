@@ -12,7 +12,7 @@ const UserService = (() => {
      */
     const getRanking = async (): Promise<UserData[]> => {
         try {
-            const { data }: { data: UserData[] } = await axios.get("/users/ranking");
+            const { data }: { data: UserData[] } = await axios.get("/api/users/ranking");
             // Set the rank in the UserData
             data.forEach((userData, index) => (userData.rank = index + 1));
             return data;
@@ -29,7 +29,7 @@ const UserService = (() => {
      */
     const getUsersByFilter = async (filter: string): Promise<UserData[]> => {
         try {
-            const { data }: { data: UserData[] } = await axios.get("/users/filter?filter=" + filter);
+            const { data }: { data: UserData[] } = await axios.get("/api/users/filter?filter=" + filter);
             return data;
         } catch (error) {
             ErrorHandler.handle(error);
@@ -43,7 +43,7 @@ const UserService = (() => {
      */
     const getAccountInfo = async (): Promise<UserData> => {
         try {
-            const { data }: { data: UserData } = await axios.get("/users/me");
+            const { data }: { data: UserData } = await axios.get("/api/users/me");
             return data;
         } catch (error) {
             ErrorHandler.handle(error);
